@@ -1,5 +1,5 @@
 class Entry
-  attr_reader :id, :date, :first_name, :last_name, :email_address, :home_phone, :street, :city, :state, :zip_code
+  attr_reader :id, :date, :first_name, :last_name, :email_address, :home_phone, :street, :city, :state, :zipcode
   #   ,RegDate,first_Name,last_Name,Email_Address,HomePhone,Street,City,State,Zipcode
 
   def initialize(data)
@@ -12,7 +12,7 @@ class Entry
     @street = data[:street]
     @city = data[:city]
     @state = data[:state]
-    @zip_code = clean_zipcode(data[:zipcode])
+    @zipcode = clean_zipcode(data[:zipcode])
   end
 
   def clean_first_name(name)
