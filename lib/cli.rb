@@ -26,7 +26,7 @@ class CLI
           csv_obj.load_file
         when find
           find1, attribute1, criteria1 = @input.split
-          csv_obj.find_by_first_name(criteria1)
+          csv_obj.choose_attribute(attribute1, criteria1)
         when queue_count_check
           puts csv_obj.queue_count
         end
