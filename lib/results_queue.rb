@@ -25,4 +25,8 @@ class ResultsQueue
     tp @results
   end
 
+  def save_results
+    @results
+  end
+
 end
