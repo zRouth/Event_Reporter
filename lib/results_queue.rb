@@ -1,3 +1,6 @@
+require 'table_print'
+require_relative 'entry'
+
 class ResultsQueue
   attr_reader :results
 
@@ -11,6 +14,10 @@ class ResultsQueue
 
   def clear
     @results = []
+  end
+
+  def print_queue
+    tp @results
   end
 
 end

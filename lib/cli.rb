@@ -33,6 +33,8 @@ class CLI
           puts queue.count
         when queue_clear_check
           queue.clear
+        when queue_print_check
+          queue.print_queue
         end
       end
   end
@@ -59,6 +61,10 @@ class CLI
 
   def queue_clear_check
     input.downcase == 'queue clear'
+  end
+
+  def queue_print_check
+    input.downcase == 'queue print'
   end
 
 end
