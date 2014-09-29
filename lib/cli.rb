@@ -1,16 +1,18 @@
 require_relative 'message_log'
 require_relative 'help'
 require_relative 'csv'
+require_relative 'find'
+require_relative 'results_queue'
 
 class CLI
 
-  attr_reader :message, :input, :help, :csv_obj
+  attr_reader :message, :input, :help, :csv, :find, :queue
 
   def initialize
     @input = ''
     @message = MessageLog.new
     @help = Help.new
-    @csv_obj = Csv.new
+    @csv = Csv.new
   end
 
   def repl_loop
@@ -23,14 +25,14 @@ class CLI
         when quit
           puts message.goodbye
         when load_check
-          csv_obj.load_file
+          @find = Find.new(csv.load_file)
         when find_check
           find1, attribute1, criteria1 = @input.split
-          csv_obj.choose_attribute(attribute1, criteria1)
+          @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
         when queue_count_check
-          puts csv_obj.queue_count
+          puts queue.count
         when queue_clear_check
-          csv_obj.queue_clear
+          queue.clear
         end
       end
   end
@@ -58,5 +60,5 @@ class CLI
   def queue_clear_check
     input.downcase == 'queue clear'
   end
-  
+
 end

@@ -4,7 +4,7 @@ class Entry
 
   def initialize(data)
     @id = data[0]
-    @date = data[:regdate]
+    @date = clean_date(data[:regdate])
     @first_name = clean_first_name(data[:first_name])
     @last_name = data[:last_name]
     @email_address = data[:email_address]
@@ -21,6 +21,11 @@ class Entry
 
   def clean_zipcode(zipcode)
     zipcode.to_s.rjust(5,"0")[0..4]
+  end
+
+  def clean_date(date)
+    date1, time1 = date.split
+    date1
   end
 
   def name
