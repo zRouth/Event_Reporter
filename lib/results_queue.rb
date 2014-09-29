@@ -16,6 +16,11 @@ class ResultsQueue
     @results = []
   end
 
+  def sort_queue
+    @results.sort! { |a,b| a.last_name <=> b.last_name }
+    print_queue
+  end
+
   def print_queue
     tp @results
   end

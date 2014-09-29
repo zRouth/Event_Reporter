@@ -35,6 +35,8 @@ class CLI
           queue.clear
         when queue_print_check
           queue.print_queue
+        when queue_sort_check
+          queue.sort_queue
         end
       end
   end
@@ -65,6 +67,10 @@ class CLI
 
   def queue_print_check
     input.downcase == 'queue print'
+  end
+
+  def queue_sort_check
+    input.downcase == 'queue print by last_name'
   end
 
 end
