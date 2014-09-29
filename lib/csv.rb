@@ -17,24 +17,14 @@ class Csv
     end
   end
 
-  # def save_queue(results)
-  #   CSV.open((File.expand_path"~/desktop/file.csv"), "w") do |csv|
-  #       csv << "abc"
-  #     end
-  #   end
-  # end
-
   def save_queue(results)
-    headers = [:_, :regdate, :first_name, :last_name, :homephone, :email_address, :street, :city, :state, :zipcode]
+    headers = [:i_d, :regdate, :first_name, :last_name, :homephone, :email_address, :street, :city, :state, :zipcode]
     CSV.open((File.expand_path"~/desktop/file.csv"), "w") do |csv|
       csv << headers
-      results.each do |d|
-        csv << [
-          d.id, d.date, d.first_name, d.last_name, d.email_address,
-          d.home_phone, d.street, d.city, d.state, d.zipcode
-        ]
+      results.each do |x|
+        csv << [ x.id, x.date, x.first_name, x.last_name, x.email_address,
+          x.home_phone, x.street, x.city, x.state, x.zipcode ]
       end
     end
   end
-
 end
