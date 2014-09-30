@@ -49,7 +49,7 @@ class CLI
       when input_checker.queue_sort_check
         queue.sort_queue(input.split.last)
       when input_checker.queue_save_check
-        csv.save_queue(@input.split[2])
+        queue.save_queue(@input.split[-1])
       end
     end
   end
