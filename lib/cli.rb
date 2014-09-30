@@ -39,7 +39,7 @@ class CLI
         when queue_print_check
           queue.print_queue
         when queue_sort_check
-          queue.sort_queue
+          queue.sort_queue(input.split.last)
         when queue_save_check
           csv.save_queue(@queue.return_results, @input.split[3])
         end
@@ -75,7 +75,8 @@ class CLI
   end
 
   def queue_sort_check
-    input.downcase == 'queue print by last_name'
+    word1, word2 = @input.split
+    word1.downcase == 'queue' && word2.downcase =='print'
   end
 
   def queue_save_check

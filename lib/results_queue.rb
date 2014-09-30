@@ -17,8 +17,8 @@ class ResultsQueue
     @results = []
   end
 
-  def sort_queue
-    @results.sort! { |a,b| a.last_name <=> b.last_name }
+  def sort_queue(attribute1)
+    @results.sort! { |a,b| a.send(attribute1.to_sym) <=> b.send(attribute1.to_sym) }
     print_queue
   end
 
