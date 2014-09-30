@@ -21,9 +21,13 @@ class CLI
     @output_stream = output_stream
   end
 
-  def repl_loop
+  def welcome_user
     @output_stream.puts message.user_start
     @input_checker = InputChecker.new(@input)
+    repl_loop
+  end
+
+  def repl_loop
     until input_checker.quit?
       @input = @input_stream.gets.strip.downcase
       input_checker.pass_input(@input)
