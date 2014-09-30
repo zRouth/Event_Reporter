@@ -35,11 +35,7 @@ class CLI
       when input_checker.load_check
         @find = Find.new(csv.load_file(input.split[1]))
       when input_checker.find_check
-        inputs = @input.split
-        find1 = inputs.first
-        attribute1 = inputs[1]
-        criteria1 = inputs[2..-1].join(' ')
-        @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+        find_attendee
       when input_checker.queue_count_check
         @output_stream.puts queue.count
       when input_checker.queue_clear_check
@@ -53,4 +49,13 @@ class CLI
       end
     end
   end
+
+  def find_attendee
+    inputs = @input.split
+    find1 = inputs.first
+    attribute1 = inputs[1]
+    criteria1 = inputs[2..-1].join(' ')
+    @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+  end
+
 end
