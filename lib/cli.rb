@@ -21,7 +21,7 @@ class CLI
   def repl_loop
     puts message.user_start
       until quit
-        @input = gets.strip
+        @input = InputFormatter.new(gets.strip).format
         case
         when check_help
           puts help.help_intro
