@@ -8,7 +8,7 @@ require 'pry'
 
 class CLI
 
-  attr_reader :message, :input, :help, :csv, :find, :queue, :input_checker
+  attr_reader :message, :input, :help, :csv, :find, :queue, :input_check
 
   def initialize(input_stream, output_stream)
     @input   = ''
@@ -23,33 +23,24 @@ class CLI
 
   def welcome_user
     @output_stream.puts message.user_start
-    @input_checker = InputChecker.new(@input)
+    @input_check = InputChecker.new(@input)
     repl_loop
   end
 
   def repl_loop
-    until input_checker.quit?
+    until input_check.quit?
       @input = @input_stream.gets.strip.downcase
-      input_checker.pass_input(@input)
+      input_check.pass_input(@input)
       case
-      when input_checker.help?
-        @output_stream.puts help.help_intro
-      when input_checker.quit?
-        @output_stream.puts message.goodbye
-      when input_checker.load?
-        @find = Find.new(csv.load_file(input.split[1]))
-      when input_checker.find?
-        find_attendee
-      when input_checker.queue_count?
-        @output_stream.puts queue.count
-      when input_checker.queue_clear?
-        queue.clear
-      when input_checker.queue_print?
-        queue.print_queue
-      when input_checker.queue_sort?
-        queue.sort_queue(input.split.last)
-      when input_checker.queue_save?
-        queue.save_queue(@input.split[-1])
+      when input_check.help? then @output_stream.puts help.help_intro
+      when input_check.quit? then @output_stream.puts message.goodbye
+      when input_check.load? then @find = Find.new(csv.load_file(input.split[1]))
+      when input_check.find? then find_attendee
+      when input_check.queue_count? then @output_stream.puts queue.count
+      when input_check.queue_clear? then queue.clear
+      when input_check.queue_print? then queue.print_queue
+      when input_check.queue_sort? then queue.sort_queue(input.split.last)
+      when input_check.queue_save? then queue.save_queue(@input.split[-1])
       end
     end
   end
