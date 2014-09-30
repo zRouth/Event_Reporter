@@ -78,8 +78,8 @@ class CLI
   end
 
   def queue_sort_check
-    word1, word2 = @input.split
-    word1.downcase == 'queue' && word2.downcase =='print'
+    word1, word2, word3 = @input.split
+    word1.downcase == 'queue' && word2.downcase =='print' && word3.downcase == 'by'
   end
 
   def queue_save_check
