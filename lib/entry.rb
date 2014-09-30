@@ -10,7 +10,7 @@ class Entry
     @email_address = data[:email_address]
     @home_phone = data[:homephone]
     @street = data[:street]
-    @city = data[:city]
+    @city = clean_generic(data[:city])
     @state = clean_generic(data[:state])
     @zipcode = clean_zipcode(data[:zipcode])
   end

@@ -30,7 +30,10 @@ class CLI
         when load_check
           @find = Find.new(csv.load_file(input.split[1]))
         when find_check
-          find1, attribute1, criteria1 = @input.split
+          inputs = @input.split
+          find1 = inputs.first
+          attribute1 = inputs[1]
+          criteria1 = inputs[2..-1].join(' ')
           @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
         when queue_count_check
           puts queue.count
