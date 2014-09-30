@@ -41,6 +41,4 @@ class ResultsQueue
       end
     end
   end
-
-
 end

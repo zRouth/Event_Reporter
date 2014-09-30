@@ -3,11 +3,12 @@ require_relative 'help'
 require_relative 'csv'
 require_relative 'find'
 require_relative 'results_queue'
+require_relative 'input_checker'
 require 'pry'
 
 class CLI
 
-  attr_reader :message, :input, :help, :csv, :find, :queue
+  attr_reader :message, :input, :help, :csv, :find, :queue, :input_checker
 
   def initialize(input_stream, output_stream)
     @input   = ''
@@ -22,71 +23,34 @@ class CLI
 
   def repl_loop
     @output_stream.puts message.user_start
-    until quit
-      @input = @input_stream.gets.strip
+    @input_checker = InputChecker.new(@input)
+    until input_checker.quit
+      @input = @input_stream.gets.strip.downcase
+      input_checker.pass_input(@input)
       case
-      when check_help
+      when input_checker.check_help
         @output_stream.puts help.help_intro
-      when quit
+      when input_checker.quit
         @output_stream.puts message.goodbye
-      when load_check
+      when input_checker.load_check
         @find = Find.new(csv.load_file(input.split[1]))
-      when find_check
+      when input_checker.find_check
         inputs = @input.split
         find1 = inputs.first
         attribute1 = inputs[1]
         criteria1 = inputs[2..-1].join(' ')
         @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
-      when queue_count_check
+      when input_checker.queue_count_check
         @output_stream.puts queue.count
-      when queue_clear_check
+      when input_checker.queue_clear_check
         queue.clear
-      when queue_print_check
+      when input_checker.queue_print_check
         queue.print_queue
-      when queue_sort_check
+      when input_checker.queue_sort_check
         queue.sort_queue(input.split.last)
-      when queue_save_check
-        queue.save_queue(@input.split[2])
+      when input_checker.queue_save_check
+        csv.save_queue(@input.split[2])
       end
     end
   end
-
-  def queue_count_check
-    input.downcase == 'queue count'
-  end
-
-  def check_help
-    input.downcase == 'h' || input.downcase == 'help'
-  end
-
-  def quit
-    input.downcase == 'q' || input.downcase == 'quit'
-  end
-
-  def load_check
-    @input.split[0] == 'load'
-  end
-
-  def find_check
-    input[0...4].downcase == 'find'
-  end
-
-  def queue_clear_check
-    input.downcase == 'queue clear'
-  end
-
-  def queue_print_check
-    input.downcase == 'queue print'
-  end
-
-  def queue_sort_check
-    word1, word2, word3 = @input.split
-    word1.downcase == 'queue' && word2.downcase =='print' && word3.downcase == 'by'
-  end
-
-  def queue_save_check
-    word1, word2 = @input.split
-    word1.downcase == 'queue' && word2.downcase =='save'
-  end
-
 end
