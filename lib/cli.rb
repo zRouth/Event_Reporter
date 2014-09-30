@@ -9,44 +9,46 @@ class CLI
 
   attr_reader :message, :input, :help, :csv, :find, :queue
 
-  def initialize
-    @input = ''
+  def initialize(input_stream, output_stream)
+    @input   = ''
     @message = MessageLog.new
-    @help = Help.new
-    @csv = Csv.new
-    @queue = ResultsQueue.new
-    @find = Find.new
+    @help    = Help.new
+    @csv     = Csv.new
+    @queue   = ResultsQueue.new
+    @find    = Find.new
+    @input_stream  = input_stream
+    @output_stream = output_stream
   end
 
   def repl_loop
-    puts message.user_start
-      until quit
-        @input = gets.strip
-        case
-        when check_help
-          puts help.help_intro
-        when quit
-          puts message.goodbye
-        when load_check
-          @find = Find.new(csv.load_file(input.split[1]))
-        when find_check
-          inputs = @input.split
-          find1 = inputs.first
-          attribute1 = inputs[1]
-          criteria1 = inputs[2..-1].join(' ')
-          @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
-        when queue_count_check
-          puts queue.count
-        when queue_clear_check
-          queue.clear
-        when queue_print_check
-          queue.print_queue
-        when queue_sort_check
-          queue.sort_queue(input.split.last)
-        when queue_save_check
-          csv.save_queue(@queue.return_results, @input.split[3])
-        end
+    @output_stream.puts message.user_start
+    until quit
+      @input = @input_stream.gets.strip
+      case
+      when check_help
+        @output_stream.puts help.help_intro
+      when quit
+        @output_stream.puts message.goodbye
+      when load_check
+        @find = Find.new(csv.load_file(input.split[1]))
+      when find_check
+        inputs = @input.split
+        find1 = inputs.first
+        attribute1 = inputs[1]
+        criteria1 = inputs[2..-1].join(' ')
+        @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+      when queue_count_check
+        @output_stream.puts queue.count
+      when queue_clear_check
+        queue.clear
+      when queue_print_check
+        queue.print_queue
+      when queue_sort_check
+        queue.sort_queue(input.split.last)
+      when queue_save_check
+        csv.save_queue(@queue.return_results, @input.split[3])
       end
+    end
   end
 
   def queue_count_check
