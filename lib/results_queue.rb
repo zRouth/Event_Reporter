@@ -1,5 +1,6 @@
 require 'table_print'
 require_relative 'entry'
+require_relative 'csv'
 
 class ResultsQueue
   attr_reader :results
@@ -29,5 +30,17 @@ class ResultsQueue
   def return_results
     @results
   end
+
+  def save_queue(file_name = "~/event_reporter_sat/Event_Reporter/file.csv")
+    headers = [:i_d, :regdate, :first_name, :last_name, :homephone, :email_address, :street, :city, :state, :zipcode]
+    CSV.open(file_name, "w") do |csv|
+      csv << headers
+      results.each do |x|
+        csv << [ x.id, x.date, x.first_name, x.last_name, x.email_address,
+          x.home_phone, x.street, x.city, x.state, x.zipcode ]
+      end
+    end
+  end
+
 
 end

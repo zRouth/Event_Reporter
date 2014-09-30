@@ -44,7 +44,7 @@ class CLI
         when queue_sort_check
           queue.sort_queue(input.split.last)
         when queue_save_check
-          csv.save_queue(@queue.return_results, @input.split[3])
+          queue.save_queue(@input.split[2])
         end
       end
   end
