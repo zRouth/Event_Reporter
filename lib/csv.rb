@@ -6,7 +6,10 @@ require_relative 'results_queue'
 class Csv
   attr_accessor :contents
 
-  def load_file(file_name = "event_attendees.csv")
+  def load_file(file_name)
+    if file_name == nil
+      file_name = "event_attendees.csv"
+    end
     @contents = CSV.open file_name, headers: true, header_converters: :symbol
     create_entries
   end
@@ -17,9 +20,9 @@ class Csv
     end
   end
 
-  def save_queue(results)
+  def save_queue(results, file_name = "~/event_reporter_sat/Event_Reporter/file.csv")
     headers = [:i_d, :regdate, :first_name, :last_name, :homephone, :email_address, :street, :city, :state, :zipcode]
-    CSV.open((File.expand_path"~/desktop/file.csv"), "w") do |csv|
+    CSV.open(file_name, "w") do |csv|
       csv << headers
       results.each do |x|
         csv << [ x.id, x.date, x.first_name, x.last_name, x.email_address,

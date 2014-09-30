@@ -4,8 +4,9 @@ require_relative 'entry'
 class ResultsQueue
   attr_reader :results
 
-  def initialize(results)
-    @results = results
+  def initialize(inputs = [])
+    inputs = [] if inputs.nil?
+    @results = inputs
   end
 
   def count
@@ -25,7 +26,7 @@ class ResultsQueue
     tp @results
   end
 
-  def save_results
+  def return_results
     @results
   end
 

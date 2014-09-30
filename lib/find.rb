@@ -1,13 +1,13 @@
 require_relative 'entry'
 
 class Find
-  def initialize(entries)
+  def initialize(entries = nil)
     @entries = entries
   end
 
   def find_by(attribute, criteria)
-    # attribute => first_name
-    entries.select { |entry| entry.send(attribute.to_sym) == criteria }
+    return if entries.nil?
+    entries.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
   end
 
   private

@@ -3,6 +3,7 @@ require_relative 'help'
 require_relative 'csv'
 require_relative 'find'
 require_relative 'results_queue'
+require 'pry'
 
 class CLI
 
@@ -13,6 +14,8 @@ class CLI
     @message = MessageLog.new
     @help = Help.new
     @csv = Csv.new
+    @queue = ResultsQueue.new
+    @find = Find.new
   end
 
   def repl_loop
@@ -25,7 +28,7 @@ class CLI
         when quit
           puts message.goodbye
         when load_check
-          @find = Find.new(csv.load_file)
+          @find = Find.new(csv.load_file(input.split[1]))
         when find_check
           find1, attribute1, criteria1 = @input.split
           @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
@@ -38,7 +41,7 @@ class CLI
         when queue_sort_check
           queue.sort_queue
         when queue_save_check
-          csv.save_queue(@queue.save_results)
+          csv.save_queue(@queue.return_results, @input.split[3])
         end
       end
   end
@@ -56,7 +59,7 @@ class CLI
   end
 
   def load_check
-    input.downcase == 'load'
+    @input.split[0] == 'load'
   end
 
   def find_check

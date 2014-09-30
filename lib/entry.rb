@@ -5,18 +5,18 @@ class Entry
   def initialize(data)
     @id = data[0]
     @date = clean_date(data[:regdate])
-    @first_name = clean_first_name(data[:first_name])
+    @first_name = clean_generic(data[:first_name])
     @last_name = data[:last_name]
     @email_address = data[:email_address]
     @home_phone = data[:homephone]
     @street = data[:street]
     @city = data[:city]
-    @state = data[:state]
+    @state = clean_generic(data[:state])
     @zipcode = clean_zipcode(data[:zipcode])
   end
 
-  def clean_first_name(name)
-    name.downcase.capitalize
+  def clean_generic(name)
+    name.to_s.downcase.capitalize
   end
 
   def clean_zipcode(zipcode)
