@@ -24,27 +24,27 @@ class CLI
   def repl_loop
     @output_stream.puts message.user_start
     @input_checker = InputChecker.new(@input)
-    until input_checker.quit
+    until input_checker.quit?
       @input = @input_stream.gets.strip.downcase
       input_checker.pass_input(@input)
       case
-      when input_checker.check_help
+      when input_checker.help?
         @output_stream.puts help.help_intro
-      when input_checker.quit
+      when input_checker.quit?
         @output_stream.puts message.goodbye
-      when input_checker.load_check
+      when input_checker.load?
         @find = Find.new(csv.load_file(input.split[1]))
-      when input_checker.find_check
+      when input_checker.find?
         find_attendee
-      when input_checker.queue_count_check
+      when input_checker.queue_count?
         @output_stream.puts queue.count
-      when input_checker.queue_clear_check
+      when input_checker.queue_clear?
         queue.clear
-      when input_checker.queue_print_check
+      when input_checker.queue_print?
         queue.print_queue
-      when input_checker.queue_sort_check
+      when input_checker.queue_sort?
         queue.sort_queue(input.split.last)
-      when input_checker.queue_save_check
+      when input_checker.queue_save?
         queue.save_queue(@input.split[-1])
       end
     end

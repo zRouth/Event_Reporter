@@ -9,40 +9,40 @@ class InputChecker
     @input = input
   end
 
-  def queue_count_check
+  def queue_count?
     input == 'queue count'
   end
 
-  def check_help
+  def help?
     input == 'h' || input == 'help'
   end
 
-  def quit
+  def quit?
     input == 'q' || input == 'quit'
   end
 
-  def load_check
+  def load?
     @input.split[0] == 'load'
   end
 
-  def find_check
+  def find?
     input[0...4] == 'find'
   end
 
-  def queue_clear_check
+  def queue_clear?
     input == 'queue clear'
   end
 
-  def queue_print_check
+  def queue_print?
     input == 'queue print'
   end
 
-  def queue_sort_check
+  def queue_sort?
     word1, word2, word3 = @input.split
     word1 == 'queue' && word2 =='print' && word3 == 'by'
   end
 
-  def queue_save_check
+  def queue_save?
     word1, word2 = @input.split
     word1 == 'queue' && word2 =='save'
   end
