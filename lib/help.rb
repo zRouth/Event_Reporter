@@ -1,13 +1,12 @@
 class Help
-  
+
   def help_select(input)
     case
       when input == 'h' || input == 'help' then help_intro
       when input.split[1] == 'load' then load_description
       when input.split[1] == 'queue' && input.split[2] == 'count' then queue_count
       when input.split[1] == 'queue' && input.split[2] == 'clear' then queue_clear
-      when input.split[1] == 'queue' && input.split[2] == 'print' && input.split[3] == 'by'
-        queue_print_attribute
+      when input.split[1] == 'queue' && input.split[2] == 'print' && input.split[3] == 'by' then queue_print_attribute
       when input.split[1] == 'queue' && input.split[2] == 'print' then queue_print
       when input.split[1] == 'queue' && input.split[2] == 'save' then save_file
       when input.split[1] == 'find' && input.split[2] == '<attribute>' then find_criteria
