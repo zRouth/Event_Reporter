@@ -52,5 +52,4 @@ class CLI
     criteria1 = inputs[2..-1].join(' ')
     @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
   end
-
 end

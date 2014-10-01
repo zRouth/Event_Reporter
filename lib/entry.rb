@@ -8,7 +8,7 @@ class Entry
     @first_name = clean_generic(data[:first_name])
     @last_name = clean_generic(data[:last_name])
     @email_address = clean_generic(data[:email_address])
-    @home_phone = data[:homephone]
+    @home_phone = clean_phone_number(data[:homephone])
     @street = clean_generic(data[:street])
     @city = clean_generic(data[:city])
     @state = clean_generic(data[:state])
@@ -26,6 +26,10 @@ class Entry
   def clean_date(date)
     date1, time1 = date.split
     date1
+  end
+
+  def clean_phone_number(number)
+    number.scan(/\d/).join('')
   end
 
 end
