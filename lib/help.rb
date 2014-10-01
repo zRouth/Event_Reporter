@@ -9,7 +9,8 @@ class Help
       when input.split[1] == 'queue' && input.split[2] == 'print' && input.split[3] == 'by' then queue_print_attribute
       when input.split[1] == 'queue' && input.split[2] == 'print' then queue_print
       when input.split[1] == 'queue' && input.split[2] == 'save' then save_file
-      when input.split[1] == 'find' && input.split[2] == '<attribute>' then find_criteria
+      when input.split[1] == 'find' && input.split[2] == '<attribute>' && input.split[4] != 'and' then find_criteria
+      when input.split[1] == 'find' && input.split[4] == 'and' then find_criteria_and
     end
   end
 
@@ -22,7 +23,8 @@ class Help
     -queue print
     -queue print by <attribute>
     -queue save to <filename.csv>
-    -find <attribute> <criteria>"
+    -find <attribute> <criteria>
+    -find <attribute> <criteria> and <atribute> <criteria>"
   end
 
   def load_description
@@ -53,4 +55,7 @@ class Help
     "Find <attribute> <criteria> will load the queue with all records matching the criteria for the given attribute."
   end
 
+  def find_criteria_and
+    "Find <attribute> <criteria> and <attribute> <criteria> will load the queue with all records matching the two criteria and attributes."
+  end
 end
