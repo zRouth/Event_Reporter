@@ -2,13 +2,23 @@ class Help
 
   def help_intro
     "Here is a list of all the commands at your disposal. Type help <command> to view what it does.\n
-    -load <filename>\n
-    -queue count\n
-    -queue clear\n
-    -queue print by <attribute>\n
-    -queue attribute by\n
-    -queue save to <filename.csv>\n
-    -find <attribute> <criteria>\n"
+    -help
+    -help <command>
+    -load <filename>
+    -queue count
+    -queue clear
+    -queue print
+    -queue print by <attribute>
+    -queue save to <filename.csv>
+    -find <attribute> <criteria>"
+  end
+
+  def help
+    "Help prints out a list of available commands."
+  end
+
+  def help_command
+    "Help <command> prints out a description of the command in question."
   end
 
   def load
@@ -27,8 +37,8 @@ class Help
     "Queue print prints out a data table of the current queue."
   end
 
-  def queue_attribute
-    "Queue print by: <attribute> will print the data table sorted by a specific attribute such as zipcode."
+  def queue_print_attribute
+    "Queue print by <attribute> will print the data table sorted by a specific attribute such as zipcode."
   end
 
   def save_file
