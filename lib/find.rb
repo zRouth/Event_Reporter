@@ -1,6 +1,8 @@
 require_relative 'entry'
 
 class Find
+  attr_reader :entries
+
   def initialize(entries = nil)
     @entries = entries
   end
@@ -9,10 +11,6 @@ class Find
     return if entries.nil?
     entries.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
   end
-
-  private
-
-  attr_reader :entries
 
 end
 
