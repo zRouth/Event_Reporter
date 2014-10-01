@@ -26,7 +26,11 @@ class InputChecker
   end
 
   def find?
-    input[0...4] == 'find'
+    input[0...4] == 'find' 
+  end
+
+  def find_and?
+    @input.include? " and "
   end
 
   def queue_clear?

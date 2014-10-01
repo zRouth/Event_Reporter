@@ -10,6 +10,9 @@ class ResultsQueue
     @results = inputs
   end
 
+  def change_results(results1)
+  end
+
   def search_twice2(inputs = [])
     inputs = [] if inputs.nil?
     @results = inputs

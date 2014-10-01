@@ -36,6 +36,7 @@ class CLI
       when input_check.quit? then @output_stream.puts message.goodbye
       when input_check.load? then @find = Find.new(csv.load_file(input.split[1]))
       when input_check.find? then find_attendee
+      when input_check.find_and? then find_attendee_two_attributes
       when input_check.queue_count? then @output_stream.puts queue.count
       when input_check.queue_clear? then queue.clear
       when input_check.queue_print? then queue.print_queue
@@ -50,7 +51,8 @@ class CLI
     find1 = inputs.first
     attribute1 = inputs[1]
     criteria1 = inputs[2..-1].join(' ')
-    @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+    find_attendee_two_attributes
+    #@queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
   end
 
   def find_attendee_two_attributes
@@ -64,7 +66,7 @@ class CLI
     puts "attribute 2 is #{attribute2}"
     puts "criteria 2 is #{criteria2}"
     @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
-    #@queue.search_twice2(find.find_by(attribute2, criteria2))
-    queue.search_twice(attribute2, criteria2)
+    @queue.search_twice(attribute2, criteria2)
+    # queue.search_twice(attribute2, criteria2)
   end
 end
