@@ -50,7 +50,6 @@ class CLI
     find1 = inputs.first
     attribute1 = inputs[1]
     criteria1 = inputs[2..-1].join(' ')
-    find_attendee_two_attributes if @input.include? " and "
     @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
   end
 
@@ -60,10 +59,10 @@ class CLI
     criteria1 = string1.split[2..-1].join(" ")
     attribute2 = string2.split[0]
     criteria2 = string2.split[1..-1].join(" ")
-    # puts "attribute 1 is #{attribute1}"
-    # puts "criteria 1 is #{criteria1}"
-    # puts "attribute 2 is #{attribute2}"
-    # puts "criteria 2 is #{criteria2}"
+    puts "attribute 1 is #{attribute1}"
+    puts "criteria 1 is #{criteria1}"
+    puts "attribute 2 is #{attribute2}"
+    puts "criteria 2 is #{criteria2}"
     @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
     #@queue.search_twice2(find.find_by(attribute2, criteria2))
     queue.search_twice(attribute2, criteria2)

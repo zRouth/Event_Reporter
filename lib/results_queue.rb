@@ -16,7 +16,7 @@ class ResultsQueue
   end
 
   def search_twice(attribute, criteria)
-    results.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
+    @results = results.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
   end
 
   def count
