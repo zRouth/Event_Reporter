@@ -36,12 +36,13 @@ class CLI
       when input_check.quit? then @output_stream.puts message.goodbye
       when input_check.load? then @find = Find.new(csv.load_file(input.split[1]))
       when input_check.find? then find_attendee
-      when input_check.find_and? then find_attendee_two_attributes
+      when input_check.find_and?    then find_attendee_two_attributes
       when input_check.queue_count? then @output_stream.puts queue.count
       when input_check.queue_clear? then queue.clear
-      when input_check.queue_print? then queue.print_queue
-      when input_check.queue_sort? then queue.sort_queue(input.split.last)
-      when input_check.queue_save? then queue.save_queue(@input.split[-1])
+      when input_check.queue_print? then @output_stream.puts queue.format_queue
+      when input_check.queue_sort?  then queue.sort_queue(input.split.last)
+                                         @output_stream.puts queue.format_queue
+      when input_check.queue_save?  then queue.save_queue(@input.split[-1])
       end
     end
   end

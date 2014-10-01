@@ -24,12 +24,12 @@ class Entry
   end
 
   def clean_date(date)
-    date1, time1 = date.split
+    date1, time1 = date.to_s.split
     date1
   end
 
   def clean_phone_number(number)
-    number.scan(/\d/).join('')
+    number.to_s.scan(/\d/).join('')
   end
 
 end

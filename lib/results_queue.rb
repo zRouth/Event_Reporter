@@ -5,9 +5,11 @@ require_relative 'csv'
 class ResultsQueue
   attr_reader :results
 
-  def initialize(inputs = [])
-    inputs = [] if inputs.nil?
-    @results = inputs
+  # ResultsQueue.new(["find", "first_name", "John"])
+  # ResultsQueue.new([Entry.new(first_name: 'John')])
+  def initialize(entries = [])
+    entries = [] if entries.nil?
+    @results = entries
   end
 
   def search_twice(attribute, criteria)
@@ -24,11 +26,10 @@ class ResultsQueue
 
   def sort_queue(attribute1)
     @results.sort! { |a,b| a.send(attribute1.to_sym) <=> b.send(attribute1.to_sym) }
-    print_queue
   end
 
-  def print_queue
-    tp @results
+  def format_queue
+    TablePrint::Printer.new(@results).table_print
   end
 
   def save_queue(file_name = "~/event_reporter_sat/Event_Reporter/file.csv")
