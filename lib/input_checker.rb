@@ -26,7 +26,7 @@ class InputChecker
   end
 
   def find?
-    input[0...4] == 'find'
+    input[0...4] == 'find' && !(@input.include? " and ")
   end
 
   def find_and?
