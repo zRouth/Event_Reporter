@@ -14,7 +14,7 @@ class Help
   end
 
   def help_intro
-    "Here is a list of all the commands at your disposal. Type help <command> to view what it does.\n
+    "Here is a list of all the commands at your disposal. Type help <command> to view what it does.
     -help
     -load <filename>
     -queue count
