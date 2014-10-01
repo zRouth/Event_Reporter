@@ -28,6 +28,7 @@ class CLI
 
   def repl_loop
     until input_check.quit?
+      puts ">"
       @input = @input_stream.gets.strip.downcase
       input_check.pass_input(@input)
       case
