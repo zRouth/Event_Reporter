@@ -1,9 +1,22 @@
 class Help
+  
+  def help_select(input)
+    case
+      when input == 'h' || input == 'help' then help_intro
+      when input.split[1] == 'load' then load_description
+      when input.split[1] == 'queue' && input.split[2] == 'count' then queue_count
+      when input.split[1] == 'queue' && input.split[2] == 'clear' then queue_clear
+      when input.split[1] == 'queue' && input.split[2] == 'print' && input.split[3] == 'by'
+        queue_print_attribute
+      when input.split[1] == 'queue' && input.split[2] == 'print' then queue_print
+      when input.split[1] == 'queue' && input.split[2] == 'save' then save_file
+      when input.split[1] == 'find' && input.split[2] == '<attribute>' then find_criteria
+    end
+  end
 
   def help_intro
     "Here is a list of all the commands at your disposal. Type help <command> to view what it does.\n
     -help
-    -help <command>
     -load <filename>
     -queue count
     -queue clear
@@ -13,15 +26,7 @@ class Help
     -find <attribute> <criteria>"
   end
 
-  def help
-    "Help prints out a list of available commands."
-  end
-
-  def help_command
-    "Help <command> prints out a description of the command in question."
-  end
-
-  def load
+  def load_description
     "Load <filename> allows you to load a file."
   end
 
@@ -45,8 +50,8 @@ class Help
     "Queue save to <filename.csv> will export the current queue to the specified filename as a CSV."
   end
 
-  def find_critera
-    "find <attribute> <criteria> will load the queue with all records matching the criteria for the given attribute."
+  def find_criteria
+    "Find <attribute> <criteria> will load the queue with all records matching the criteria for the given attribute."
   end
 
 end

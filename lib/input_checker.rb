@@ -14,7 +14,7 @@ class InputChecker
   end
 
   def help?
-    input == 'h' || input == 'help'
+    input.split[0] == 'h' || input.split[0] == 'help'
   end
 
   def quit?
@@ -22,7 +22,7 @@ class InputChecker
   end
 
   def load?
-    @input.split[0] == 'load'
+    input.split[0] == 'load'
   end
 
   def find?

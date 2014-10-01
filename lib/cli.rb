@@ -7,7 +7,6 @@ require_relative 'input_checker'
 require 'pry'
 
 class CLI
-
   attr_reader :message, :input, :help, :csv, :find, :queue, :input_check
 
   def initialize(input_stream, output_stream)
@@ -32,7 +31,7 @@ class CLI
       @input = @input_stream.gets.strip.downcase
       input_check.pass_input(@input)
       case
-      when input_check.help? then @output_stream.puts help.help_intro
+      when input_check.help? then @output_stream.puts help.help_select(input)
       when input_check.quit? then @output_stream.puts message.goodbye
       when input_check.load? then @find = Find.new(csv.load_file(input.split[1]))
       when input_check.find? then find_attendee
