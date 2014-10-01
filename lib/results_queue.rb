@@ -10,14 +10,6 @@ class ResultsQueue
     @results = inputs
   end
 
-  def change_results(results1)
-  end
-
-  def search_twice2(inputs = [])
-    inputs = [] if inputs.nil?
-    @results = inputs
-  end
-
   def search_twice(attribute, criteria)
     @results = results.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
   end
