@@ -28,7 +28,7 @@ class CLI
 
   def repl_loop
     until input_check.quit?
-      puts ">"
+      @output_stream.print ">"
       @input = @input_stream.gets.strip.downcase
       input_check.pass_input(@input)
       case
@@ -50,6 +50,18 @@ class CLI
     find1 = inputs.first
     attribute1 = inputs[1]
     criteria1 = inputs[2..-1].join(' ')
+    find_attendee_two_attributes if @input.include? " and "
     @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+  end
+
+  def find_attendee_two_attributes
+    string1, string2 = @input.split("and ")
+    attribute1 = string1.split[1]
+    criteria1 = string1.split[2..-1].join(" ")
+    attribute2 = string2.split[0]
+    criteria2 = string2.split[1..-1].join(" ")
+    @queue = ResultsQueue.new(find.find_by(attribute1, criteria1))
+    #@queue.search_twice2(find.find_by(attribute2, criteria2))
+    queue.search_twice(attribute2, criteria2)
   end
 end

@@ -10,6 +10,16 @@ class ResultsQueue
     @results = inputs
   end
 
+  def search_twice2(inputs = [])
+    inputs = [] if inputs.nil?
+    @results = inputs
+  end
+
+  def search_twice(attribute, criteria)
+    return if results.nil?
+    results.select { |entry| entry.send(attribute.to_sym) == criteria.downcase.capitalize }
+  end
+
   def count
     results.count
   end
