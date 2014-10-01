@@ -77,5 +77,4 @@ class EntryTest < Minitest::Test
     assert_equal "Co", entry.state
     assert_equal "80204", entry.zipcode
   end
-
 end
