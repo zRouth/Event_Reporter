@@ -27,10 +27,6 @@ class ResultsQueue
     tp @results
   end
 
-  def return_results
-    @results
-  end
-
   def save_queue(file_name = "~/event_reporter_sat/Event_Reporter/file.csv")
     headers = [:i_d, :regdate, :first_name, :last_name, :homephone, :email_address, :street, :city, :state, :zipcode]
     CSV.open(file_name, "w") do |csv|

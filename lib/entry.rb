@@ -6,10 +6,10 @@ class Entry
     @id = data[0]
     @date = clean_date(data[:regdate])
     @first_name = clean_generic(data[:first_name])
-    @last_name = data[:last_name]
-    @email_address = data[:email_address]
+    @last_name = clean_generic(data[:last_name])
+    @email_address = clean_generic(data[:email_address])
     @home_phone = data[:homephone]
-    @street = data[:street]
+    @street = clean_generic(data[:street])
     @city = clean_generic(data[:city])
     @state = clean_generic(data[:state])
     @zipcode = clean_zipcode(data[:zipcode])
@@ -26,10 +26,6 @@ class Entry
   def clean_date(date)
     date1, time1 = date.split
     date1
-  end
-
-  def name
-    "#{@first_name} #{@last_name}"
   end
 
 end
