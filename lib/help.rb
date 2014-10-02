@@ -28,35 +28,35 @@ class Help
   end
 
   def load_description
-    "Load <filename> allows you to load a file."
+    "Load <filename>: allows you to load a file."
   end
 
 
   def queue_count
-    "Queue count -tells you how many records are in the current queue."
+    "Queue count: tells you how many records are in the current queue."
   end
 
   def queue_clear
-    "Queue clear -empties the current queue."
+    "Queue clear: empties the current queue."
   end
 
   def queue_print
-    "Queue print -prints out a data table of the current queue."
+    "Queue print: prints out a data table of the current queue."
   end
 
   def queue_print_attribute
-    "Queue print by <attribute> will print the data table sorted by a specific attribute such as zipcode"
+    "Queue print by <attribute>: will print the data table sorted by a specific attribute such as zipcode."
   end
 
   def save_file
-    "Queue save to <filename.csv> -will export the current queue to the specified filename as a CSV."
+    "Queue save to <filename.csv>: will export the current queue to the specified filename as a CSV."
   end
 
   def find_criteria
-    "Find <attribute> <criteria> will load the queue with all records matching the criteria for the given attribute."
+    "Find <attribute> <criteria>: will load the queue with all records matching the criteria for the given attribute."
   end
 
   def find_criteria_and
-    "Find <attribute> <criteria> and <attribute> <criteria> will load the queue with all records matching the two criteria and attributes."
+    "Find <attribute> <criteria> and <attribute> <criteria>: will load the queue with all records matching the two criteria and attributes."
   end
 end
