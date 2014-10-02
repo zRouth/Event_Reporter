@@ -14,6 +14,18 @@ class ResultsQueueTest < Minitest::Test
     assert_equal 2, queue.count
   end
 
+  def test_it_can_clear_its_results
+    queue = ResultsQueue.new([Entry.new({}), Entry.new({})])
+    assert_equal 2, queue.count
+    queue.clear
+    assert_equal 0, queue.count
+
+    queue = ResultsQueue.new([Entry.new({}), Entry.new({}), Entry.new({}), Entry.new({})])
+    assert_equal 4, queue.count
+    queue.clear
+    assert_equal 0, queue.count
+  end
+
   def test_it_can_sort_by_some_attribute
     queue = ResultsQueue.new([
       Entry.new(0 => 2, first_name: 'a', last_name: 'c'),
@@ -29,10 +41,4 @@ class ResultsQueueTest < Minitest::Test
     queue.sort_queue :last_name
     assert_equal [3, 1, 2], queue.results.map { |e| e.id }
   end
-
-  # test_it_format_the_results_as_a_table
-  # ...
-
-
-
 end
