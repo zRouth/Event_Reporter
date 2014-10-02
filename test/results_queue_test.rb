@@ -41,4 +41,17 @@ class ResultsQueueTest < Minitest::Test
     queue.sort_queue :last_name
     assert_equal [3, 1, 2], queue.results.map { |e| e.id }
   end
+
+  def test_it_can_save_results
+    queue = ResultsQueue.new([
+      Entry.new(0 => 2, first_name: 'a', last_name: 'c'),
+      Entry.new(0 => 1, first_name: 'b', last_name: 'b'),
+      Entry.new(0 => 3, first_name: 'c', last_name: 'a'),
+    ])
+
+    queue.save_queue("results_queue_save_test_example.csv")
+
+    File.file?("/test/results_queue_save_test_example.csv")
+    File.exist?("/test/results_queue_save_test_example.csv")
+  end
 end
